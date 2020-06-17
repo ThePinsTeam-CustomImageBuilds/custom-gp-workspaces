@@ -1,0 +1,33 @@
+version: 2.0
+
+jobs:
+  workspace-full:
+    docker:
+      - image: csweichel/dazzle:latest
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          command: |
+            ./.circleci/dazzle_build_image.sh custom-images/gp-workspace-full/Dockerfile madebythepinshub/gp-workspace-full workspace-full.tar
+          no_output_timeout: 30m
+      - run:
+          name: Save test results
+          command: |
+            mkdir -p ~/test-results/dazzle/
+            cp full/*.xml ~/test-results/dazzle
+          when: always
+      - store_test_results:
+          path: ~/test-results
+      - store_artifacts:
+          path: ~/test-results/dazzle
+      - persist_to_workspace:
+          root: .
+          paths:
+            - workspace-full.tar
+
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - workspace-full

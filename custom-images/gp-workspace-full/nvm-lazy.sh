@@ -1,6 +1,6 @@
 #!/bin/bash
 
-## Copied from https://github.com/gitpod-io/workspace-images/blob/master/full/nvm-lazy.sh
+## Copied its contents from https://github.com/gitpod-io/workspace-images/blob/master/full/nvm-lazy.sh
 
 # Lazy-load NVM
 # Based on https://www.reddit.com/r/node/comments/4tg5jg/lazy_load_nvm_for_faster_shell_start/d5ib9fs

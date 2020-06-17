@@ -19,11 +19,12 @@ jobs:
     - name: Build and push Docker images
       uses: docker/build-push-action@v1.1.0
       with:
+        ## Use our tema Docker Hub username.
         username: thepinsteam
         ## No one will knows about its access key.
         password: ${{ secrets.DOCKER_REGISTRY_ACCESS_KEY }}
         repository: madebythepinshub/custom-gp-workspace
-        tags_with_ref: true
         dockerfile: custom-images/gp-workspace-full/Dockerfile
+        path: custom-images/gp-workspace-full
         push: true
         tags: latest

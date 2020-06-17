@@ -5,8 +5,7 @@
 FROM buildpack-deps:buster
 
 ### Base dependencies ###
-RUN yes | unminimize \
-    && apt-get install -yq \
+RUN apt-get install -yq \
         zip \
         unzip \
         bash-completion \

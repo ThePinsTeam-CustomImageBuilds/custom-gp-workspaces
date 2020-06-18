@@ -34,7 +34,8 @@ RUN add-apt-repository -y ppa:git-core/ppa \
     && rm -rf /var/lib/apt/lists/*
 
 ### Create an generic Gitpod user ###
-RUN useradd -m gitpod && echo "gitpod:gitpod" | chpasswd && adduser sudo
+RUN useradd -l -G sudo -md /home/gitpod -s /bin/bash -p gitpod gitpod \
+    && echo "gitpod:gitpod" | chpasswd
 
 ENV HOME=/home/gitpod
 WORKDIR $HOME

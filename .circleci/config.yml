@@ -10,7 +10,7 @@ jobs:
       - run:
           command: |
             chmod 777 startDockerBuild.sh
-            ./startDockerBuild custom-images/debian/gp-workspace-full/Dockerfile madebythepinsteam/gp-workspace-full
+            ./startDockerBuild custom-images/debian/gp-workspace-full/Dockerfile madebythepinsteam/gp-workspace-full --dazzle madebythepinsteam/gp-workspace-full.tar
           no_output_timeout: 30m
       - run:
           name: Save test results

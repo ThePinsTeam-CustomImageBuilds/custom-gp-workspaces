@@ -11,7 +11,7 @@ jobs:
           command: |
             chmod 777 ./.circleci/dazzle_build_image.sh
             chmod 777 ./.circleci/build_image.sh
-            ./.circleci/dazzle_build_image.sh custom-images/gp-workspace-full/Dockerfile madebythepinshub/gp-workspace-full workspace-full.tar
+            ./.circleci/dazzle_build_image.sh custom-images/ubuntu/gp-workspace-full/Dockerfile madebythepinshub/gp-workspace-full workspace-full.tar
           no_output_timeout: 30m
       - run:
           name: Save test results

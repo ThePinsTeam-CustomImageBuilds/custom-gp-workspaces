@@ -1,11 +1,11 @@
 ## Copied from https://github.com/gitpod-io/workspace-images/blob/master/full/Dockerfile
 ## And then customized based on our needs
 
-## Use Debian instead
 FROM buildpack-deps:focal
 
-### Base dependencies ###
-RUN apt-get install -yq \
+### base ###
+RUN yes | unminimize \
+    && apt-get install -yq \
         zip \
         unzip \
         bash-completion \
@@ -34,7 +34,7 @@ RUN add-apt-repository -y ppa:git-core/ppa \
     && rm -rf /var/lib/apt/lists/*
 
 ### Create an generic Gitpod user ###
-RUN useradd -m gitpod && echo "gitpod:gitpod" | chpasswd && adduser docker sudo
+RUN useradd -m gitpod && echo "gitpod:gitpod" | chpasswd && adduser sudo
 
 ENV HOME=/home/gitpod
 WORKDIR $HOME

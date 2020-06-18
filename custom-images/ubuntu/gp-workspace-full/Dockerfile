@@ -2,7 +2,7 @@
 ## And then customized based on our needs
 
 ## Use Debian instead
-FROM buildpack-deps:buster
+FROM buildpack-deps:focal
 
 ### Base dependencies ###
 RUN apt-get install -yq \

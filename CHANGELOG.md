@@ -1,3 +1,5 @@
 # Changelog History
 
-We're not yet wrote any changelog here. To see what changed in real-time, see the commit history.
+## Current - WIP
+
+* Renamed repo to `custom-gp-workspaces` since `sudo` are now available under an feature flag in Gitpod.io.

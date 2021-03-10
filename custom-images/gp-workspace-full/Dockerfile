@@ -1,37 +1,65 @@
-## Copied from https://github.com/gitpod-io/workspace-images/blob/master/full/Dockerfile
-## And then customized based on our needs
-
-FROM buildpack-deps:focal
+FROM buildpack-deps:buster
 
 ### base ###
-RUN yes | unminimize \
-    && apt-get install -yq \
-        zip \
-        unzip \
-        bash-completion \
-        build-essential \
-        htop \
-        jq \
-        less \
-        locales \
-        man-db \
-        nano \
-        software-properties-common \
-        sudo \
-        time \
-        vim \
-        multitail \
-        lsof \
-    && locale-gen en_US.UTF-8 \
-    && mkdir /var/lib/apt/dazzle-marks \
-    && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/*
+RUN set -ex; \
+	apt-get update; \
+# make sure debconf doesn't try to prompt (e.g. tzdata on Ubuntu)
+	DEBIAN_FRONTEND=noninteractive \
+	apt-get install -y --no-install-recommends \
+		autoconf \
+		automake \
+		bzip2 \
+		dpkg-dev \
+		file \
+		g++ \
+		gcc \
+		imagemagick \
+		libbz2-dev \
+		libc6-dev \
+		libcurl4-openssl-dev \
+		libdb-dev \
+		libevent-dev \
+		libffi-dev \
+		libgdbm-dev \
+		libglib2.0-dev \
+		libgmp-dev \
+		libjpeg-dev \
+		libkrb5-dev \
+		liblzma-dev \
+		libmagickcore-dev \
+		libmagickwand-dev \
+		libmaxminddb-dev \
+		libncurses5-dev \
+		libncursesw5-dev \
+		libpng-dev \
+		libpq-dev \
+		libreadline-dev \
+		libsqlite3-dev \
+		libssl-dev \
+		libtool \
+		libwebp-dev \
+		libxml2-dev \
+		libxslt-dev \
+		libyaml-dev \
+		make \
+		patch \
+		unzip \
+		xz-utils \
+		zlib1g-dev \
+		\
+# https://lists.debian.org/debian-devel-announce/2016/09/msg00000.html
+		$( \
+# if we use just "apt-cache show" here, it returns zero because "Can't select versions from package 'libmysqlclient-dev' as it is purely virtual", hence the pipe to grep
+			if apt-cache show 'default-libmysqlclient-dev' 2>/dev/null | grep -q '^Version:'; then \
+				echo 'default-libmysqlclient-dev'; \
+			else \
+				echo 'libmysqlclient-dev'; \
+			fi \
+		) \
+	; \
+	rm -rf /var/lib/apt/lists/*
 
 ENV LANG=en_US.UTF-8
-
-### Install Git ###
-RUN add-apt-repository -y ppa:git-core/ppa \
-    && apt-get install -yq git \
-    && rm -rf /var/lib/apt/lists/*
 
 ### Create an generic Gitpod user ###
 RUN useradd -l -G sudo -md /home/gitpod -s /bin/bash -p gitpod gitpod \

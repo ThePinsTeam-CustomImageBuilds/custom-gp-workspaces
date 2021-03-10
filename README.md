@@ -1,8 +1,10 @@
-# Custom Gitpod Workspace Images with `sudo`
+# Custom Gitpod Workspace Images
 
 We build customized Gitpod Workspace images for your need, with `sudo` access. We had
-to browow stuff from [the official Git repository](https://github.com/gitpod-io/workspace-images)
-and configure these images bsed on what we need.
+to borrow stuff from [the official Git repository](https://github.com/gitpod-io/workspace-images)
+and configure these images bsed on what we need. PRs are welcome!
+
+Please be reminded that these are currently WIP, so use with caution.
 
 ## Installation
 
